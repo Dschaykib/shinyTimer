@@ -1,6 +1,17 @@
-#' <Add Title>
+#' @title A timer widget for RShiny
 #'
-#' <Add Description>
+#' @description THe function creates a timer, that counts down.
+#'
+#' @details The format can contain "d" days, "h" hours, "m" minutes and or "s"
+#' seconds. For example "ms" will only display minutes and seconds. If the next
+#' higher unit is not given, the amount will be added to the last unit. eg 70
+#' seconds instead of 1:10.
+#'
+#' @param count Countdown in seconds
+#' @param format A string indicating the displayed format (see details)
+#' @param width The width of the input, e.g. '400px', or '100%'.
+#' @param height The height of the input, e.g. '400px', or '100%'.
+#' @param elementId The input slot that will be used to access the value.
 #'
 #' @import htmlwidgets
 #'
