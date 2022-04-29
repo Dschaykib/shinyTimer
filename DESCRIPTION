@@ -1,9 +1,11 @@
 Package: shinyTimer
 Title: Creation of NEWS.md File
-Version: 0.0.1.9000
-Date: 2022-04-23
-Authors@R: 
-    person("Jakob", "Gepp", , "jakob.gepp@statworx.com", role = c("cre", "aut"))
+Version: 0.0.1.9001
+Date: 2022-04-29
+Authors@R: c(
+    person("Jakob", "Gepp", , "jakob.gepp@statworx.com", role = c("cre", "aut")),
+    person("Pascal", "Wiltschko", , "pascal.wiltschko@statworx.com", role = c("cre", "aut"))
+  )
 Description: Adding updates (version or bullet points) to the NEWS.md
     file.
 License: MIT + file LICENSE
