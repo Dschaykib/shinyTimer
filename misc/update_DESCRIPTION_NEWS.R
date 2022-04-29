@@ -1,4 +1,6 @@
 # script to create the DESCRIPTION file
+library(newsmd)
+library(origin)
 
 # Remove default DESC and NEWS.md
 unlink("DESCRIPTION")
@@ -58,6 +60,15 @@ my_desc$bump_version("patch")
 my_news$add_version(my_desc$get_version())
 
 my_news$add_bullet(c("adding newsmd for easier creation"))
+
+
+# collaboration -------------------------------------------------------
+
+my_desc$bump_version("dev")
+my_news$add_version(my_desc$get_version())
+my_desc$add_author('Pascal', 'Wiltschko',
+                   email = 'pascal.wiltschko@statworx.com',
+                   role = c('cre', 'aut'))
 
 
 # WIP ---------------------------------------------------------------------
