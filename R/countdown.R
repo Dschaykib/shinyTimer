@@ -1,53 +1,53 @@
 #' @title A timer widget for RShiny
 #'
-#' @description THe function creates a timer, that counts down.
+#' @description The function creates a timer that counts down.
 #'
 #' @details The format can contain "d" days, "h" hours, "m" minutes and or "s"
 #' seconds. For example "ms" will only display minutes and seconds. If the next
-#' higher unit is not given, the amount will be added to the last unit. eg 70
+#' higher unit is not given, the amount will be added to the last unit, e.g., 70
 #' seconds instead of 1:10.
 #'
-#' @param count Countdown in seconds
-#' @param format A string indicating the displayed format (see details)
-#' @param width The width of the input, e.g. '400px', or '100%'.
-#' @param height The height of the input, e.g. '400px', or '100%'.
+#' @param count Countdown in seconds.
+#' @param format A string indicating the displayed format (see details).
+#' @param sep A string indicating the used separator. Default is ":".
+#' @param width The width of the input, e.g. "400px", or "100%".
+#' @param height The height of the input, e.g. "400px", or "100%".
 #' @param elementId The input slot that will be used to access the value.
 #'
 #' @import htmlwidgets
 #'
 #' @export
-countdown <- function(count = 5*60,
+countdown <- function(count = 5 * 60,
                       format = "ms",
+                      sep = ":",
                       width = NULL,
                       height = NULL,
                       elementId = NULL) {
-
   # parse format
   # TODO adjust for more variety
-  days <- grepl(pattern = "d", x = format)
-  hours <- grepl(pattern = "h", x = format) | days
-  minutes <- grepl(pattern = "m", x = format) | hours
-  seconds <- grepl(pattern = "s", x = format) | minutes
-
+  is_days <- grepl(pattern = "d", x = format)
+  is_hours <- grepl(pattern = "h", x = format) | is_days
+  is_minutes <- grepl(pattern = "m", x = format) | is_hours
+  is_seconds <- grepl(pattern = "s", x = format) | is_minutes
 
   # set inputs for js widgets
-  parameter = list(
+  parameters <-  list(
     count = count,
-    days = days,
-    hours = hours,
-    minutes = minutes,
-    seconds = seconds,
-    sep = ":",
+    is_days = is_days,
+    is_hours = is_hours,
+    is_minutes = is_minutes,
+    is_seconds = is_seconds,
+    sep = sep,
     format = format
   )
 
   # create widget
   htmlwidgets::createWidget(
-    name = 'countdown',
-    x = parameter,
+    name = "countdown",
+    x = parameters,
     width = width,
     height = height,
-    package = 'shinyTimer',
+    package = "shinyTimer",
     elementId = elementId
   )
 }
@@ -69,8 +69,8 @@ countdown <- function(count = 5*60,
 #' @name countdown-shiny
 #'
 #' @export
-countdownOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'countdown', width, height, package = 'shinyTimer')
+countdownOutput <- function(outputId, width = "100%", height = "400px"){
+  htmlwidgets::shinyWidgetOutput(outputId, "countdown", width, height, package = "shinyTimer")
 }
 
 #' @rdname countdown-shiny
