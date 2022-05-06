@@ -7,8 +7,8 @@ unlink("DESCRIPTION")
 unlink("NEWS.md")
 
 # update renv packages if needed
-renv::clean()
-renv::snapshot(prompt = TRUE)
+#renv::clean()
+#renv::snapshot(prompt = TRUE)
 
 
 # initial files -----------------------------------------------------------
@@ -68,7 +68,7 @@ my_desc$bump_version("dev")
 my_news$add_version(my_desc$get_version())
 my_desc$add_author('Pascal', 'Wiltschko',
                    email = 'pascal.wiltschko@statworx.com',
-                   role = c('cre', 'aut'))
+                   role = c('aut'))
 
 
 # WIP ---------------------------------------------------------------------

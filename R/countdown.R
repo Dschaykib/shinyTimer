@@ -69,7 +69,7 @@ countdown <- function(count = 5 * 60,
 #' @name countdown-shiny
 #'
 #' @export
-countdownOutput <- function(outputId, width = "100%", height = "400px"){
+countdownOutput <- function(outputId, width = "fit-content", height = "400px"){
   htmlwidgets::shinyWidgetOutput(outputId, "countdown", width, height, package = "shinyTimer")
 }
 
