@@ -19,18 +19,15 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins
     sidebarLayout(
         sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30),
-            shinyTimer::countdownOutput("thisTimer", height = "30px"),
-            shinyTimer::countdownOutput("thisTimer2", height = "30px")
+            shiny::uiOutput("InputEasyTimer")
+            #shinyTimer::countdownOutput("thisTimer", height = "30px"),
+            #shinyTimer::countdownOutput("thisTimer2", height = "30px"),
+
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-           plotOutput("distPlot")
+            shinyTimer::EasyTimerOutput("thisTimer3", height = "30px")
         )
     )
 )
@@ -38,19 +35,33 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    # output$distPlot <- renderPlot({
+    #     # generate bins based on input$bins from ui.R
+    #     x    <- faithful[, 2]
+    #     bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    #     # draw the histogram with the specified number of bins
+    #     hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    # })
+
+    output$InputEasyTimer <- shiny::renderUI({
+        sliderInput("InputEasyTimer",
+                    label = h3("seconds countdown"),
+                    min = 0,
+                    max = 100,
+                    value = 50)
     })
 
-    output$thisTimer <- shinyTimer::renderCountdown({
-        shinyTimer::countdown(15, format = "m")
-    })
-    output$thisTimer2 <- shinyTimer::renderCountdown({
-        shinyTimer::countdown(30, format = "m")
+
+
+    # output$thisTimer <- shinyTimer::renderCountdown({
+    #     shinyTimer::countdown(15, format = "m")
+    # })
+    # output$thisTimer2 <- shinyTimer::renderCountdown({
+    #     shinyTimer::countdown(30, format = "m")
+    # })
+
+    output$thisTimer3 <- shinyTimer::renderEasyTimer({
+        shinyTimer::EasyTimer(seconds = input$InputEasyTimer)
     })
 }
 
